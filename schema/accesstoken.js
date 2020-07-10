@@ -7,7 +7,7 @@ const accessTokenSchema = mongoose.Schema({
     access_Token: {
         type : String
     },
-    dateGenerated: {
+    date_Generated: {
         type : String
     }
 })

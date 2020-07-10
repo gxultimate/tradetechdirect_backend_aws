@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var Distributor = require('../schema/distributor');
+var Distributor = require('../schema/distributor'),
+Function = require('./function'),
+func = new Function();
 
 router.post('/distributors', (req, res) => {
 	const request = req.body.data;
@@ -56,17 +58,10 @@ router.post('/distributors/login', (req, res) => {
 	});
 });
 
-function removeUndefinedProps(obj) {
-	for (var prop in obj) {
-		if (obj.hasOwnProperty(prop) && obj[prop] === '') {
-			delete obj[prop];
-		}
-	}
-	return obj;
-}
+
 
 router.put('/distributors/:id', (req, res) => {
-	const request = removeUndefinedProps(req.body.data);
+	const request = func.removeUndefinedProps(req.body.data);
 	let id = req.params.id;
 
 	let dis = Distributor.findByIdAndUpdate( id , request, (err, place) => {

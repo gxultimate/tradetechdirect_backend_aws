@@ -54,6 +54,11 @@ const accountSchema = mongoose.Schema({
     },
     account_storeName : {
         type : String,
+        required: true
+    },
+    account_storeAddress: {
+        type : String,
+        required: true
     }
     
 })

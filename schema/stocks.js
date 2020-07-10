@@ -31,6 +31,13 @@ const stockSchema = mongoose.Schema({
     distributor_ID :{
         type: String
     },   
+    stock_Detail:{
+        type:String
+    }
+    ,   
+    stock_Out:{
+        type:Number
+    }
 
    
 })

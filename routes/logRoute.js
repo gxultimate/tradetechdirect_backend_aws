@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var Log = require('../schema/log');
+var Log = require('../schema/log'),
+Function = require('./function'),
+func = new Function();
 
 router.post('/log', (req, res) => {
 	const request = req.body.data;
@@ -37,10 +39,10 @@ router.get('/log/:id', (req, res) => {
 });
 
 router.put('/log/:id', function(req, res) {
-	const request = req.body.data;
+	const request = func.removeUndefinedProps(req.body.data);
 
 	let id = req.params.id;
-	Log.findByIdAndUpdate({ _id: id }, request, { new: true }, (err, place) => {
+	Log.findByIdAndUpdate({ _id: id }, request, { new: true ,useFindAndModify: false}, (err, place) => {
 		if (err) return res.send(err);
 		const log = Log.find({}, (err, docs) => {
 			setTimeout(() => {

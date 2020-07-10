@@ -6,6 +6,8 @@ cloudinary = require('cloudinary'),
 cloudinaryStorage = require('multer-storage-cloudinary'),
 uuidv4 = require('uuid/v4'),
 lokijs  = require('lokijs'),
+Function = require('./function'),
+func = new Function(),
 fs = require('fs');
 
 cloudinary.config({
@@ -33,8 +35,6 @@ router.post('/upload', parser.single('productImg') ,(req , res, next) => {
   const image = {};
   image.url = req.file.url;
   image.id = req.file.public_id;
-
-  
   res.json(image)
 })
 
@@ -58,8 +58,11 @@ router.post('/upload', parser.single('productImg') ,(req , res, next) => {
             product_ExpirationDate: request.product_ExpirationDate,
             product_Remarks: request.product_Remarks,
             distributor_ID: request.distributor_ID,
-            product_Status: request.product_Status,
-            product_Stocks: 0
+            product_Stocks: request.product_Stocks,
+            product_Status:request.product_Status,
+            product_Favorite:request.product_Favorite,
+            product_Packaging:request.product_Packaging,
+            product_Variant:request.product_Variant,
         })
             product
             .save()
@@ -105,10 +108,10 @@ router.post('/upload', parser.single('productImg') ,(req , res, next) => {
 
     
   router.put('/product/:id', function (req, res) {
-    const request = req.body.data;
+    const request = func.removeUndefinedProps(req.body.data);
     
     let id = req.params.id
-    Product.findByIdAndUpdate({_id : id} , request , {new: true}, (err, place)=> {
+    Product.findByIdAndUpdate({_id : id} , request , {new: true,useFindAndModify: false}, (err, place)=> {
       if(err) return res.send(err);
       const product = Product.find({} , (err, docs) => {
         setTimeout(() => {

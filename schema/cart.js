@@ -1,19 +1,19 @@
-const  mongoose  = require('mongoose')
+const mongoose = require('mongoose')
 
 const cartSchema = mongoose.Schema({
-   cart_ID : {
-    type: String
-   },
-   account_ID :{
-       type: String
-   },
-   product_ID: {
-    type: String,
+    cart_ID: {
+        type: String
+    },
+    account_ID: {
+        type: String
+    },
+    product_ID: {
+        type: String,
     },
     product_Name: {
         type: String,
     },
-    product_Category:{
+    product_Category: {
         type: String
     },
     product_Description: {
@@ -43,23 +43,28 @@ const cartSchema = mongoose.Schema({
     product_Remarks: {
         type: String,
     },
-    product_SubCategory:{
+    product_SubCategory: {
         type: String
     },
-    distributor_ID :{
+    distributor_ID: {
         type: String
     },
-    product_Quantity : {
-        type : String
+    product_Quantity: {
+        type: String
     },
-    product_TransactionDate : {
-        type : String
-    },    
-    product_TotalAmount : {
+    product_TransactionDate: {
+        type: String
+    },
+    product_TotalAmount: {
+        type: String
+    },
+    product_Packaging: {
+        type: String
+    },
+    product_Variant: {
         type: String
     }
-   
 })
 
 
-module.exports = Cart = mongoose.model('cartSchema' , cartSchema);
+module.exports = Cart = mongoose.model('cartSchema', cartSchema);

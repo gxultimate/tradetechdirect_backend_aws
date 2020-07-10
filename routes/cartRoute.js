@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Cart = require('../schema/cart'),
+	Function = require('./function'),
+	func = new Function(),
 	uuidv4 = require('uuid/v4');
 
 router.post('/cart', (req, res) => {
@@ -29,7 +31,9 @@ router.post('/cart', (req, res) => {
 					distributor_ID: request.distributor_ID,
 					product_Quantity: request.product_Quantity,
 					product_TransactionDate: request.product_TransactionDate,
-					product_TotalAmount: request.product_TotalAmount
+					product_TotalAmount: request.product_TotalAmount,
+					product_Packaging: request.product_Packaging,
+					product_Variant: request.product_Variant,
 				});
 				cart
 					.save()
@@ -51,7 +55,7 @@ router.post('/cart', (req, res) => {
 				const cart = Cart.findOneAndUpdate(
 					{ account_ID: id },
 					{ product_Quantity: newQuantity },
-					{ new: true },
+					{ new: true, useFindAndModify: false },
 					(err, docs) => {
 						const cart = Cart.find(
 							{ account_ID: request.account_ID, distributor_ID: request.distributor_ID },
@@ -70,27 +74,33 @@ router.post('/cart', (req, res) => {
 
 router.get('/cart/:id', (req, res) => {
 	let id = req.params.id;
+	if (id !== null || id !== "") {
+		const cart = Cart.find({ account_ID: id }, (err, docs) => {
+			if (docs.length !== 0) {
+				res.json(docs);
+			}
+			else {
+				Cart.find({ distributor_ID: id }, (err, docs) => {
+					res.json(docs);
+				});
+			}
 
-	const cart = Cart.find({ account_ID: id }, (err, docs) => {
-		res.json(docs);
-	});
+		});
+	}
+	else {
+		res.sendStatus(403).send(false)
+	}
+
+
 });
 
-function removeUndefinedProps(obj) {
-	for (var prop in obj) {
-		if (obj.hasOwnProperty(prop) && obj[prop] === '') {
-			delete obj[prop];
-		}
-	}
-	return obj;
-}
 
-router.put('/cart/:id/:accountID/:distributorID', function(req, res) {
-	const request = removeUndefinedProps(req.body.data);
+router.put('/cart/:id/:accountID', function (req, res) {
+	const request = func.removeUndefinedProps(req.body.data);
 	let id = req.params.id;
 	let accountID = req.params.accountID;
 
-	Cart.findByIdAndUpdate({ _id: id }, request, { new: true }, (err, place) => {
+	Cart.findByIdAndUpdate({ _id: id }, request, { new: true, useFindAndModify: false }, (err, place) => {
 		if (err) return res.send(err);
 
 		const cart = Cart.find({ account_ID: accountID }, (err, docs) => {

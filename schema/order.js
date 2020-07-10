@@ -42,6 +42,18 @@ const orderSchema = mongoose.Schema({
 	},
 	order_totalPayment: {
 		type: String
+	},
+	orderReturnDate: {
+		type: String
+	},
+	orderDateCompleted: {
+		type: String
+	},
+	orderCustomerBalance : {
+		type: String
+	},
+	orderDueDate : {
+		type: String
 	}
 });
 

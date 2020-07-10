@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(helmet())
 app.use('/public', express.static('public'));
 
-app.use('/api' , routes)
+app.use('/' , routes)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -2,6 +2,8 @@ let express = require('express'),
 	router = express.Router(),
 	Report = require('../schema/report'),
 	uuidv4 = require('uuid/v4'),
+	Function = require('./function'),
+	func = new Function(),
 	moment = require('moment');
 
 router.post('/report', (req, res) => {
@@ -10,14 +12,18 @@ router.post('/report', (req, res) => {
 		report_ID: uuidv4(),
 		order_ID: request.order_ID,
 		report_Detail: request.report_Detail,
+		distributor_ID:request.distributor_ID,
+		account_ID:request.account_ID,
 		report_Note: request.report_Note,
 		report_Date: moment().format('LL'),
-		report_Status: request.report_Status
+		report_Status: request.report_Status,
+		report_Type: request.report_Type,
+
 	});
 	report
 		.save()
 		.then((result) => {
-			const report = Report.find({}, (err, docs) => {
+			const report = Report.find({distributor_ID:request.distributor_ID}, (err, docs) => {
 				setTimeout(() => {
 					res.json(docs);
 				}, 1200);
@@ -27,8 +33,16 @@ router.post('/report', (req, res) => {
 			res.json({ status: false });
 		});
 });
+router.get('/report', async (req, res) => {
+	await Report.find({ }, (err, docs) => {
+		if (docs.length !== 0) {
+			res.json(docs);
+		} 
+		
+	});
+});
 
-router.get('/report/:id', async(req, res) => {
+router.get('/report/:id', async (req, res) => {
 	const id = req.params.id;
 	await Report.find({ report_ID: id }, (err, docs) => {
 		if (docs.length !== 0) {
@@ -49,12 +63,10 @@ router.get('/report/:id', async(req, res) => {
 
 
 
-router.put('/report/:id', function(req, res) {
-	const request = req.body.data;
-
+router.put('/report/:id', function (req, res) {
+	const request = func.removeUndefinedProps(req.body.data);
 	let id = req.params.id;
-
-	Report.findByIdAndUpdate({ _id: id }, request, { new: true }, (err, place) => {
+	Report.findByIdAndUpdate({ _id: id }, request, { new: true, useFindAndModify: false }, (err, place) => {
 		if (err) return res.send(err);
 		const report = Report.find({}, (err, docs) => {
 			setTimeout(() => {

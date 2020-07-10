@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var Inventory = require("../schema/inventory")
+var Inventory = require("../schema/inventory"),
+Function = require('./function'),
+func = new Function();
 
     router.post('/inventory', (req, res) => {
         const request = req.body.data;
@@ -54,10 +56,10 @@ var Inventory = require("../schema/inventory")
 
     
   router.put('/inventory/:id', function (req, res) {
-    const request = req.body.data;
+    const request = func.removeUndefinedProps(req.body.data);
     
     let id = req.params.id
-    Inventory.findByIdAndUpdate({_id : id} , request , {new: true}, (err, place)=> {
+    Inventory.findByIdAndUpdate({_id : id} , request , {new: true,useFindAndModify: false}, (err, place)=> {
       if(err) return res.send(err);
       const inventory = Inventory.find({} , (err, docs) => {
         setTimeout(() => {

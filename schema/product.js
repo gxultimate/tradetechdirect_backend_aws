@@ -41,14 +41,23 @@ const productSchema = mongoose.Schema({
         type: String,
     },
     product_SubCategory:{
-        type: String
+        type: String,
     },
     distributor_ID :{
-        type: String
+        type: String,
     },
-    product_Status : {
-        type : String
-    }
+    product_Status :{
+        type: String,
+    },
+    product_Favorite :{
+        type: String,
+    },
+    product_Packaging:{
+        type: String,
+    },
+        product_Variant:{
+        type: String,
+    },
    
 })
 
