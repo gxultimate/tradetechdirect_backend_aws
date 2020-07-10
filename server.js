@@ -5,12 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
 
-var accountRouter = require('./routes/accountRoute');
-var productRouter = require('./routes/productRoute');
-var distributorRouter = require('./routes/distributorRoute')
-var inventoryRouter = require('./routes/inventoryRoute')
-var stockRouter = require('./routes/stockRoute')
-var cartRouter = require('./routes/cartRoute')
 var routes = require('./routes/index')
 var bodyParser = require("body-parser")
 var compression = require('compression')
