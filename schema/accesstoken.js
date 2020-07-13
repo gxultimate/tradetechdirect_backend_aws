@@ -9,6 +9,9 @@ const accessTokenSchema = mongoose.Schema({
     },
     date_Generated: {
         type : String
+    },
+    distributor_wHouse:{
+        type:String
     }
 })
 
