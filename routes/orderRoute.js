@@ -13,6 +13,7 @@ router.post('/order', (req, res) => {
 		modeOfPayment: request.modeOfPayment,
 		orderDate: request.orderDate,
 		orderItems: request.orderItems,
+		orderPrice:request.orderPrice,
 		orderStatus: request.orderStatus,
 		paymentStatus: request.paymentStatus,
 		orderTotalAmount: request.orderTotalAmount,
