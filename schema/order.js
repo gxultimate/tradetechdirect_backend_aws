@@ -13,6 +13,9 @@ const orderSchema = mongoose.Schema({
 	orderItems: {
 		type: Array
 	},
+	orderPrice: {
+		type: Array
+	},
 	orderStatus: {
 		type: String
 	},
