@@ -14,6 +14,9 @@ const membershipSchema = mongoose.Schema({
     access_Token: {
         type: String
     },
+    distributor_wHouse:{
+        type:String
+    },
 
 })
 

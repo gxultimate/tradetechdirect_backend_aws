@@ -11,6 +11,7 @@ router.post('/membership', (req, res) => {
     const membership = new Membership({
         membership_ID:request.membership_ID,
         distributor_ID:request.distributor_ID,
+        distributor_wHouse:request.distributor_wHouse,
         account_ID:request.account_ID,
         access_Token:request.access_Token
 

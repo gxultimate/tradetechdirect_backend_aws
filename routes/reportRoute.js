@@ -15,8 +15,9 @@ router.post('/report', (req, res) => {
 		distributor_ID:request.distributor_ID,
 		account_ID:request.account_ID,
 		report_Note: request.report_Note,
-		report_Date: moment().format('LL'),
+		report_Date: moment().format('MMM/DD/YYYY'),
 		report_Status: request.report_Status,
+		report_Sender: request.report_Sender,
 		report_Type: request.report_Type,
 
 	});

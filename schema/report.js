@@ -22,6 +22,9 @@ const reportSchema = mongoose.Schema({
 	report_Type: {
 		type: String
 	},
+	report_Sender: {
+		type: String
+	},
     distributor_ID : {
         type : String
 	},

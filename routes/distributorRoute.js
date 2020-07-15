@@ -22,7 +22,7 @@ router.post('/distributors', (req, res) => {
 		distributor_lName: request.distributor_lName,
 		distributor_mName: request.distributor_mName
 	});
-	distributor
+	distributor	
 		.save()
 		.then((result) => {
 			const distributor = Distributor.find({}, (err, docs) => {
