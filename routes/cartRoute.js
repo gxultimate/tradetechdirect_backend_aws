@@ -14,6 +14,7 @@ router.post('/cart', (req, res) => {
 			if (err || docs === null) {
 				const cart = new Cart({
 					cart_ID: uuidv4(),
+					cart_Status:request.cart_Status,
 					account_ID: request.account_ID,
 					product_ID: request.product_ID,
 					product_Name: request.product_Name,

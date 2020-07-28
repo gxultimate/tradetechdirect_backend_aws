@@ -16,6 +16,9 @@ const orderSchema = mongoose.Schema({
 	orderPrice: {
 		type: Array
 	},
+	orderTotalPrice: {
+		type: Array
+	},
 	orderStatus: {
 		type: String
 	},
@@ -56,6 +59,13 @@ const orderSchema = mongoose.Schema({
 		type: String
 	},
 	orderDueDate : {
+		type: String
+	}
+	,
+	order_shippingAddress: {
+		type: String
+	},
+	order_storeName: {
 		type: String
 	}
 });

@@ -43,6 +43,8 @@ router.get('/report', async (req, res) => {
 	});
 });
 
+ 
+
 router.get('/report/:id', async (req, res) => {
 	const id = req.params.id;
 	await Report.find({ report_ID: id }, (err, docs) => {

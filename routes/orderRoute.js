@@ -14,6 +14,7 @@ router.post('/order', (req, res) => {
 		orderDate: request.orderDate,
 		orderItems: request.orderItems,
 		orderPrice:request.orderPrice,
+		orderTotalPrice:request.orderTotalPrice,
 		orderStatus: request.orderStatus,
 		paymentStatus: request.paymentStatus,
 		orderTotalAmount: request.orderTotalAmount,
@@ -27,7 +28,10 @@ router.post('/order', (req, res) => {
 		orderReturnDate:request.orderReturnDate,
 		orderDateCompleted:request.orderDateCompleted,
 		orderCustomerBalance:request.orderCustomerBalance,
-		orderDueDate :request.orderDueDate
+		order_shippingAddress :request.order_shippingAddress,
+		order_storeName :request.order_storeName,
+		orderDueDate:request.orderDueDate,
+		
 	});
 	order
 		.save()

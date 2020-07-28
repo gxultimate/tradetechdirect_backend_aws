@@ -11,7 +11,8 @@ router.post('/token', (req, res) => {
   const uuid = uuidv4().split('').slice(0, 7).join("");
   const accesstoken = new AccessToken(
     {
-      access_Token: `${request.distributor_warehouseName.toLowerCase().replace(/ +/g, "")}${uuid}`,
+      // access_Token: `${request.distributor_warehouseName.toLowerCase().replace(/ +/g, "")}${uuid}`,
+      access_Token:request.access_Token,
       date_Generated: moment().format('MMM/DD/YYYY'),
       distributor_ID : request.distributor_ID,
       distributor_wHouse : request.distributor_wHouse,

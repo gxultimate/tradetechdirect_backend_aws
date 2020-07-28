@@ -4,6 +4,9 @@ const cartSchema = mongoose.Schema({
     cart_ID: {
         type: String
     },
+    cart_Status:{
+       type:String
+    },
     account_ID: {
         type: String
     },
