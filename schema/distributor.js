@@ -42,6 +42,9 @@ const distributorSchema = mongoose.Schema({
     },
     distributor_mName : {
         type: String,
+    },
+    termsCondition:{
+        type:String
     }
 })
 

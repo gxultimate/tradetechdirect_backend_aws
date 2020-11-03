@@ -6,6 +6,11 @@ const productFavorite = mongoose.Schema({
     },
     account_ID: {
         type: String
+    },product_ID: {
+        type: String
+    },
+    status: {
+        type: String
     }
 
 

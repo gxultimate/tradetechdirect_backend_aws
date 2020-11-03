@@ -112,6 +112,7 @@ router.post('/accounts/login', (req, res) => {
 });
 
 router.put('/accounts/:id', function (req, res) {
+
 	const request = func.removeUndefinedProps((req.body.data));
 	let id = req.params.id;
 	Account.findByIdAndUpdate({ _id: id }, request, { useFindAndModify: false }, (err, place) => {

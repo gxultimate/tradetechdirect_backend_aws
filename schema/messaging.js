@@ -10,10 +10,10 @@ const messagingToken = mongoose.Schema({
     sender_Name: {
         type : String
     },
-    distributor_ID : {
+    sender_ID : {
         type : String
     },
-    account_ID : {
+    recipient_ID : {
         type : String
     },
     recipient_Name: {
@@ -21,6 +21,12 @@ const messagingToken = mongoose.Schema({
     },
     message_Subject: {
         type: String
+    },
+    message_ID:{
+        type:String
+    },
+    message_Status:{
+        type:String
     }
 })
 

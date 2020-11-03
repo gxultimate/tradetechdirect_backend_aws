@@ -33,7 +33,7 @@ const storage = cloudinaryStorage({
 
 router.post('/upload', parser.single('productImg') ,(req , res, next) => {
   const image = {};
-  image.url = req.file.url;
+  image.url = req.file.secure_url;
   image.id = req.file.public_id;
   res.json(image)
 })

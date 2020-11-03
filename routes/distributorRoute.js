@@ -20,7 +20,8 @@ router.post('/distributors', (req, res) => {
 		distributor_accessType: request.distributor_accessType,
 		distributor_fName: request.distributor_fName,
 		distributor_lName: request.distributor_lName,
-		distributor_mName: request.distributor_mName
+		distributor_mName: request.distributor_mName,
+		termsCondition: request.termsCondition
 	});
 	distributor	
 		.save()

@@ -13,13 +13,15 @@ router.post('/message', (req, res) => {
 
     const messaging = new Messaging(
         {
+            message_ID: request.message_ID,
             date_Created: request.date_Created,
             mesage_Body: request.mesage_Body,
             sender_Name: request.sender_Name,
-            distributor_ID: request.distributor_ID,
-            account_ID: request.account_ID,
+            sender_ID: request.sender_ID,
+            recipient_ID: request.recipient_ID,
             recipient_Name: request.recipient_Name,
-            message_Subject : request.message_Subject
+            message_Subject : request.message_Subject,
+            message_Status : request.message_Status,
         }
     )
     messaging
@@ -32,6 +34,14 @@ router.post('/message', (req, res) => {
         })
 })
 
+router.get('/message', async (req, res) => {
+	await Messaging.find({ }, (err, docs) => {
+		if (docs.length !== 0) {
+			res.json(docs);
+		} 
+		
+	});
+});
 
 router.get('/message/:id', (req, res) => {
     const id = req.params.id
@@ -40,7 +50,7 @@ router.get('/message/:id', (req, res) => {
             res.json(docs)
         }
         else {
-            Messaging.find({ distributor_ID: id }, (err, docs) => {
+            Messaging.find({ sender_ID: id }, (err, docs) => {
                 if (docs.length !== 0) {
                     res.json(docs)
                 } else {

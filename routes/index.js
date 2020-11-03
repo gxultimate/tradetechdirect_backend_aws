@@ -9,10 +9,12 @@ const accessTokenRouter = require('./accessTokenRoute'),
 	stockRouter = require('./stockRoute'),
 	reportRouter = require('./reportRoute'),
 	logRouter = require('./logRoute'),
+    stockoutRouter = require('./stockoutRoute'),
 	notificationRouter = require('./notificationRoute'),
 	messagingRouter = require('./messagingRoute'),
 	productFavorite = require('./productfavortieRoute'),
 	memberShipRoute = require('./membershipRoute'),
+	priceHistoryRouter = require('./pricehistoryRoute')
 	express = require('express'),
 	router = express.Router();
 router.use('/', accessTokenRouter);
@@ -26,10 +28,11 @@ router.use('/', accessTokenRouter);
 router.use('/', stockRouter);
 router.use('/', reportRouter);
 router.use('/', logRouter);
+router.use('/', stockoutRouter);
 router.use('/', loginTokenRouter);
 router.use('/', notificationRouter);
 router.use('/', messagingRouter);
 router.use('/', productFavorite);
 router.use('/', memberShipRoute);
-
+router.use('/', priceHistoryRouter);
 module.exports = router;

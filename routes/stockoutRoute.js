@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var Stock = require("../schema/stocks")
+var Stock = require("../schema/stockOut")
 var Product = require('../schema/product')
 var Function =  require('./function');
 var func = new Function()
 
-router.post('/stock/:id', (req, res) => {
+router.post('/stockout/:id', (req, res) => {
   const request = req.body.data;
   let stockItem = 0
   let id = req.params.id
@@ -24,17 +24,17 @@ router.post('/stock/:id', (req, res) => {
       product_Category: request.product_Category,
       product_UoM: request.product_UoM,
       product_Brand: request.product_Brand,
-      product_replenishDate: request.product_replenishDate,
-      product_expirationDate: request.product_expirationDate,
+      product_stockoutDate: request.product_stockoutDate,
+
       distributor_ID: request.distributor_ID,
       stock_Detail: request.distributor_ID,
       stock_Out: parseInt(request.stock_Out),
-      product_replenishQty: parseInt(request.product_replenishQty)
+  
     })
   stock.save()
     .then(result => {
       let qty = { 
-        product_Stocks: parseInt(stockItem) + parseInt(request.product_replenishQty) || parseInt(stockItem) - parseInt(request.stock_Out)}
+        product_Stocks:  parseInt(stockItem) - parseInt(request.stock_Out)}
       Product.findByIdAndUpdate({ _id: id }, qty, { new: true, useFindAndModify: false }, (err, place) => {
         if (err) return res.send(err);
         const product = Product.find({ distributor_ID: request.distributor_ID }, (err, docs) => {
@@ -51,7 +51,7 @@ router.post('/stock/:id', (req, res) => {
 })
 
 
-router.get('/stock/:id', (req, res) => {
+router.get('/stockout/:id', (req, res) => {
   let id = req.params.id
   const stocks = Stock.find({ distributor_ID: id }, (err, docs) => {
     res.json(docs)
@@ -61,7 +61,7 @@ router.get('/stock/:id', (req, res) => {
 
 
 
-router.put('/stock/:id', function (req, res) {
+router.put('/stockout/:id', function (req, res) {
   const request = func.removeUndefinedProps(req.body.data);
 
   let id = req.params.id

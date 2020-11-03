@@ -1,11 +1,11 @@
 const  mongoose  = require('mongoose')
 
-const stockSchema = mongoose.Schema({
+const stockoutSchema = mongoose.Schema({
     stock_ID :{
         type : String
     },
     product_Name:{
-        type:String
+        type:Array
     },
     product_Category:{
         type:String
@@ -19,14 +19,8 @@ const stockSchema = mongoose.Schema({
     product_Brand:{
         type:String
     },
-    product_replenishDate:{
+    product_stockoutDate:{
         type:String
-    },
-    product_expirationDate:{
-        type:String
-    },
-    product_replenishQty :{
-        type: Number
     },
     distributor_ID :{
         type: String
@@ -34,10 +28,13 @@ const stockSchema = mongoose.Schema({
     stock_Detail:{
         type:String
     }
-  
+    ,   
+    stock_Out:{
+        type:Array
+    }
 
    
 })
 
 
-module.exports = Stocks = mongoose.model('stockSchema' , stockSchema);
+module.exports = Stocksout = mongoose.model('stockoutSchema' , stockoutSchema);
